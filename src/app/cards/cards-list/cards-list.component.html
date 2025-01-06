@@ -1,0 +1,8 @@
+<div>
+  <h2>Commanders</h2>
+  @for (card of cards; track $index) {
+    <p>{{ card.name }} </p>
+  }
+
+  <button (click)="loadMore()">Load More</button>
+</div>
