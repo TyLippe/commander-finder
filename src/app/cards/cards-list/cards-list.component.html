@@ -1,24 +1,22 @@
 <div>
-  <h2>Commanders</h2>
-  @for (card of cards; track $index) {
-    <mat-card class="example-card" appearance="outlined">
+  <h2>Commander Finder</h2>
+  <div class="card-list-container">
+    @for (card of cards; track $index) {
+    <mat-card class="card-container" appearance="outlined">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{card.name}} </mat-card-title>
-        <mat-card-subtitle>Second Line</mat-card-subtitle>
+        <mat-card-title>{{ card.name }} </mat-card-title>
+        <mat-card-subtitle>{{ card.set_name }}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src={{card.image_url}} alt="Photo of {{card.name}}">
-      <mat-card-content>
-        <p>
-          Description
-        </p>
+      <img
+        mat-card-image
+        src="{{ card.image_url }}"
+        alt="Photo of {{ card.name }}"
+      />
+      <mat-card-content class="card-content">
+        <p>{{ card.description }}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <button mat-button>Button 1</button>
-        <button mat-button>Button 2</button>
-      </mat-card-actions>
     </mat-card>
-  }
-
-  <button (click)="loadMore()">Load More</button>
+    }
+  </div>
+  <button mat-stroked-button (click)="loadMore()">Load More</button>
 </div>

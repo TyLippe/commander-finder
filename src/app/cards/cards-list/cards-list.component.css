@@ -1,0 +1,49 @@
+h2 {
+  text-align: center;
+}
+
+.card-list-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.card-container {
+  margin: 14px;
+  height: auto;
+  width: 360px;
+  border-radius: 8px;
+
+  .mat-mdc-card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    .mat-mdc-card-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+
+    .mat-mdc-card-subtitle {
+      font-size: 12px;
+      font-style: italic;
+    }
+  }
+
+  img {
+    padding: 12px;
+    width: 360px;
+  }
+
+  .card-content {
+    padding: 12px;
+    text-align: center;
+  }
+}
+
+.mdc-button {
+  margin: 0 auto;
+  display: block;
+}
