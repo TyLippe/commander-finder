@@ -5,14 +5,14 @@ h2 {
 .card-list-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  padding-left: 240px;
   margin: 0 auto;
 }
 
 .card-container {
   margin: 14px;
   height: auto;
-  width: 360px;
+  width: 280px;
   border-radius: 8px;
 
   .mat-mdc-card-header {
@@ -32,9 +32,20 @@ h2 {
     }
   }
 
+  .flip-button {
+    background-color: #121212;
+    border: 1px solid white;
+    border-radius: 12px;
+    width: 80px;
+    height: 36px;
+    margin: 0 auto;
+  }
+
   img {
     padding: 12px;
-    width: 360px;
+    width: 240px;
+    display: block;
+    margin: 0 auto;
   }
 
   .card-content {

@@ -1,22 +1,26 @@
 <div>
   <h2>Commander Finder</h2>
+  <app-filter-bar></app-filter-bar>
   <div class="card-list-container">
-    @for (card of cards; track $index) {
-    <mat-card class="card-container" appearance="outlined">
-      <mat-card-header>
-        <mat-card-title>{{ card.name }} </mat-card-title>
-        <mat-card-subtitle>{{ card.set_name }}</mat-card-subtitle>
-      </mat-card-header>
-      <img
-        mat-card-image
-        src="{{ card.image_url }}"
-        alt="Photo of {{ card.name }}"
-      />
-      <mat-card-content class="card-content">
-        <p>{{ card.description }}</p>
-      </mat-card-content>
-    </mat-card>
-    }
+    <ng-container *ngFor="let card of cards">
+      <mat-card class="card-container" appearance="outlined">
+        <mat-card-header>
+          <mat-card-title>{{ card.name }}</mat-card-title>
+          <mat-card-subtitle>{{ card.set_name }}</mat-card-subtitle>
+        </mat-card-header>
+        <img
+          mat-card-image
+          src="{{ card.image_url }}"
+          alt="Photo of {{ card.name }}"
+        />
+        <div *ngIf="card.canBeFlipped" class="flip-button">
+          <button mat-button (click)="flipCard(card)">Flip</button>
+        </div>
+        <mat-card-content class="card-content">
+          <p>{{ card.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </ng-container>
   </div>
   <button mat-stroked-button (click)="loadMore()">Load More</button>
 </div>
