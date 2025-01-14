@@ -1,55 +1,45 @@
 <div class="filter-bar">
   <h2>Filters</h2>
+
   <h3>Color(s):</h3>
-  <form>
-    <div>
-      <input type="checkbox" id="red" name="color" value="red" />
-      <label for="red">Red</label>
-    </div>
-    <div>
-      <input type="checkbox" id="green" name="color" value="green" />
-      <label for="green">Green</label>
-    </div>
-    <div>
-      <input type="checkbox" id="blue" name="color" value="blue" />
-      <label for="blue">Blue</label>
-    </div>
-    <div>
-      <input type="checkbox" id="white" name="color" value="white" />
-      <label for="white">White</label>
-    </div>
-    <div>
-      <input type="checkbox" id="black" name="color" value="black" />
-      <label for="black">Black</label>
-    </div>
-    <div>
-      <input type="checkbox" id="colorless" name="color" value="colorless" />
-      <label for="colorless">Colorless</label>
+  <form [formGroup]="filterForm">
+    <div *ngFor="let color of colors">
+      <input
+        type="checkbox"
+        [id]="color"
+        name="color"
+        [value]="color.name"
+        (change)="onColorChange($event, color.name)"
+      />
+      <label [for]="color">{{ color.name | titlecase }}</label>
     </div>
   </form>
-  <h3>Cost:</h3>
-  <form>
+
+  <h3>Max Cost:</h3>
+  <form [formGroup]="filterForm">
     <div>
-      <select id="power" name="power">
+      <select id="cost" name="cost" formControlName="max_cost">
         <option value="" selected>Any</option>
-        <option
-          *ngFor="let cost of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index"
-          [value]="cost"
-        >
+        <option *ngFor="let cost of costs" [value]="cost">
           {{ cost }}
         </option>
       </select>
     </div>
   </form>
+
   <h3>Set:</h3>
-  <form>
+  <form [formGroup]="filterForm">
     <div>
-      <select id="set" name="set">
+      <select id="set" name="set" formControlName="set">
         <option value="" selected>Any</option>
-        <option *ngFor="let set of sets" [value]="set">
+        <option *ngFor="let set of sets" [value]="set.name">
           {{ set.name }}
         </option>
       </select>
     </div>
   </form>
+
+  <div>
+    <button type="button" (click)="applyFilters()">Filter</button>
+  </div>
 </div>

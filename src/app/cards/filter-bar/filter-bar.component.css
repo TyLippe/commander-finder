@@ -5,4 +5,39 @@
   height: 100%;
   width: 240px;
   background-color: #121212;
+
+  select {
+    width: 90%;
+    padding: 10px;
+    background-color: #121212;
+    color: #fff;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    outline: none;
+  }
+
+  button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    padding: 10px;
+    background-color: #121212;
+    color: #fff;
+    border: 1px solid #fff;
+    font-size: 16px;
+    font-weight: 300;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  button:hover {
+    background-color: #fff;
+    color: #121212;
+  }
 }
