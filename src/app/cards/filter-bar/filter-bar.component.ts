@@ -79,8 +79,6 @@ export class FilterBarComponent implements OnInit {
 
   applyFilters(): void {
     const filters = this.filterForm.value;
-    this.cardsService.getFilteredCommanders(filters).subscribe((cards) => {
-      console.log('Filtered cards:', cards);
-    });
+    this.cardsService.setFilters(filters);
   }
 }

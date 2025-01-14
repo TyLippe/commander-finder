@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -7,6 +7,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class CardsService {
   private apiUrl = 'https://api.scryfall.com';
+  private filtersSubject = new BehaviorSubject<any>({});
+  filters$ = this.filtersSubject.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
@@ -28,6 +30,10 @@ export class CardsService {
     return this.httpClient.get(this.apiUrl + '/sets', {
       headers,
     });
+  }
+
+  setFilters(filters: any) {
+    this.filtersSubject.next(filters);
   }
 
   getFilteredCommanders(filters: any): Observable<any> {

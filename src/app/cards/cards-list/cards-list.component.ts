@@ -21,6 +21,13 @@ export class CardsListComponent implements OnInit {
   constructor(private cardsService: CardsService) {}
 
   ngOnInit(): void {
+    this.cardsService.filters$.subscribe((filters) => {
+      this.cardsService.getFilteredCommanders(filters).subscribe((cards) => {
+        this.cards = cards.data.map((card: any) => this.shapeCardData(card));
+        this.next_page = cards.next_page;
+      });
+    });
+
     this.cardsService.getCommanders().subscribe((cards) => {
       this.cards = cards.data.map((card: any) => {
         return this.shapeCardData(card);
