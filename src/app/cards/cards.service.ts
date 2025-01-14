@@ -1,4 +1,5 @@
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, of, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -16,13 +17,21 @@ export class CardsService {
     const headers = { 'User-Agent': 'CommanderCollector/1.0' };
     const params = { q: 'is:commander' };
 
-    return this.httpClient.get(
-      next_page ? next_page : this.apiUrl + '/cards/search',
-      {
-        headers,
-        params,
-      }
-    );
+    try {
+      return this.httpClient.get(
+        next_page ? next_page : this.apiUrl + '/cards/search',
+        {
+          headers,
+          params,
+        }
+      );
+    } catch (error) {
+      console.error('Error fetching commanders:', error);
+      return new Observable((observer) => {
+        observer.next([]);
+        observer.complete();
+      });
+    }
   }
 
   getCardSets(): Observable<any> {
@@ -32,7 +41,7 @@ export class CardsService {
     });
   }
 
-  setFilters(filters: any) {
+  setFilters(filters: any): void {
     this.filtersSubject.next(filters);
   }
 
@@ -53,12 +62,19 @@ export class CardsService {
       query += ' set=' + filters.set;
     }
 
-    return this.httpClient.get(
-      next_page ? next_page : this.apiUrl + '/cards/search',
-      {
+    return this.httpClient
+      .get(next_page ? next_page : this.apiUrl + '/cards/search', {
         headers,
         params: { q: query },
-      }
-    );
+      })
+      .pipe(
+        catchError((error) => {
+          if (error.status === 404) {
+            return of([]);
+          } else {
+            return throwError(error);
+          }
+        })
+      );
   }
 }

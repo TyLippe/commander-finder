@@ -3,6 +3,7 @@ import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { Card } from '../models/card';
 import { CardsService } from '../cards.service';
@@ -10,7 +11,13 @@ import { FilterBarComponent } from '../filter-bar/filter-bar.component';
 
 @Component({
   selector: 'app-cards-list',
-  imports: [MatCardModule, MatButtonModule, FilterBarComponent, CommonModule],
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
+    FilterBarComponent,
+    CommonModule,
+  ],
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.css',
 })

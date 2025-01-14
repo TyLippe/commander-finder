@@ -2,6 +2,11 @@
   <h2>Commander Finder</h2>
   <app-filter-bar></app-filter-bar>
   <div class="card-list-container">
+    <ng-container *ngIf="cards.length === 0">
+      <div class="loading-spinner">
+        <mat-spinner></mat-spinner>
+      </div>
+    </ng-container>
     <ng-container *ngFor="let card of cards">
       <mat-card class="card-container" appearance="outlined">
         <mat-card-header>
