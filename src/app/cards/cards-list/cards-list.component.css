@@ -1,11 +1,14 @@
 h2 {
   text-align: center;
+  font-family: "Cinzel", serif;
+  font-size: 2rem;
+  color: #f0f0f0;
 }
 
 .card-list-container {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 240px;
+  padding-left: 250px;
   margin: 0 auto;
 }
 
@@ -14,47 +17,85 @@ h2 {
   height: auto;
   width: 280px;
   border-radius: 8px;
-
-  .mat-mdc-card-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-
-    .mat-mdc-card-title {
-      font-size: 1.2rem;
-      font-weight: bold;
-    }
-
-    .mat-mdc-card-subtitle {
-      font-size: 12px;
-      font-style: italic;
-    }
-  }
-
-  .flip-button {
-    background-color: #121212;
-    border: 1px solid white;
-    border-radius: 12px;
-    width: 80px;
-    height: 36px;
-    margin: 0 auto;
-  }
-
-  img {
-    padding: 12px;
-    width: 240px;
-    display: block;
-    margin: 0 auto;
-  }
-
-  .card-content {
-    padding: 12px;
-    text-align: center;
-  }
+  background-color: #333;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
 }
 
-.mdc-button {
-  margin: 0 auto;
+.card-container:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.mat-mdc-card-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background-color: #444;
+  border-bottom: 1px solid #555;
+}
+
+.mat-mdc-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+.mat-mdc-card-subtitle {
+  font-size: 12px;
+  font-style: italic;
+  color: #aaa;
+}
+
+.flip-button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 12px;
+  width: 80px;
+  height: 36px;
+  margin: 12px auto;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flip-button:hover {
+  background-color: #0056b3;
+}
+
+img {
+  padding: 12px;
+  width: 240px;
   display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+}
+
+.card-content {
+  padding: 16px;
+  text-align: center;
+  font-family: "Roboto", sans-serif;
+  color: #f0f0f0;
+}
+
+.load-button {
+  margin: 12px auto;
+  display: block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.load-button:hover {
+  background-color: #0056b3;
 }
