@@ -38,13 +38,24 @@ export class CardsListComponent implements OnInit {
 
   loadMore(): void {
     if (this.next_page) {
-      this.cardsService.getCommanders(this.next_page).subscribe((cards) => {
-        this.cards = this.cards.concat(
-          cards.data.map((card: any) => {
-            return this.shapeCardData(card);
-          })
-        );
-        this.next_page = cards.next_page;
+      this.cardsService.filters$.subscribe((filters) => {
+        if (Object.keys(filters).length > 0) {
+          this.cardsService
+            .getFilteredCommanders(filters, this.next_page)
+            .subscribe((cards) => {
+              this.cards = this.cards.concat(
+                cards.data.map((card: any) => this.shapeCardData(card))
+              );
+              this.next_page = cards.next_page;
+            });
+        } else {
+          this.cardsService.getCommanders(this.next_page).subscribe((cards) => {
+            this.cards = this.cards.concat(
+              cards.data.map((card: any) => this.shapeCardData(card))
+            );
+            this.next_page = cards.next_page;
+          });
+        }
       });
     }
   }

@@ -36,7 +36,10 @@ export class CardsService {
     this.filtersSubject.next(filters);
   }
 
-  getFilteredCommanders(filters: any): Observable<any> {
+  getFilteredCommanders(
+    filters: any,
+    next_page: string | null = null
+  ): Observable<any> {
     const headers = { 'User-Agent': 'CommanderCollector/1.0' };
 
     let query = 'is:commander';
@@ -50,9 +53,12 @@ export class CardsService {
       query += ' set=' + filters.set;
     }
 
-    return this.httpClient.get(this.apiUrl + '/cards/search', {
-      headers,
-      params: { q: query },
-    });
+    return this.httpClient.get(
+      next_page ? next_page : this.apiUrl + '/cards/search',
+      {
+        headers,
+        params: { q: query },
+      }
+    );
   }
 }
