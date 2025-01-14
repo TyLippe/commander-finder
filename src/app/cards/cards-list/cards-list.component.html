@@ -22,7 +22,12 @@
       </mat-card>
     </ng-container>
   </div>
-  <button mat-stroked-button class="load-button" (click)="loadMore()">
+  <button
+    *ngIf="next_page"
+    mat-stroked-button
+    class="load-button"
+    (click)="loadMore()"
+  >
     Load More
   </button>
 </div>
