@@ -7,7 +7,7 @@ import {
   FormGroup,
 } from '@angular/forms';
 
-import { Set } from '../set';
+import { Set } from '../models/set';
 import { CardsService } from '../cards.service';
 
 @Component({

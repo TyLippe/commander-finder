@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
-import { Card } from '../card';
+import { Card } from '../models/card';
 import { CardsService } from '../cards.service';
 import { FilterBarComponent } from '../filter-bar/filter-bar.component';
 
