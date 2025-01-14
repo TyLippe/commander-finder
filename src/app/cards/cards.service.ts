@@ -19,4 +19,11 @@ export class CardsService {
       }
     );
   }
+
+  getCardSets(): Observable<any> {
+    const headers = { 'User-Agent': 'CommanderCollector/1.0' };
+    return this.httpClient.get(this.apiUrl + '/sets', {
+      headers,
+    });
+  }
 }

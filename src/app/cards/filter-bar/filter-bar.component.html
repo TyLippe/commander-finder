@@ -1,6 +1,6 @@
 <div class="filter-bar">
   <h2>Filters</h2>
-  <h3>Commander Color:</h3>
+  <h3>Color(s):</h3>
   <form>
     <div>
       <input type="checkbox" id="red" name="color" value="red" />
@@ -27,16 +27,27 @@
       <label for="colorless">Colorless</label>
     </div>
   </form>
-  <h3>Commander Cost:</h3>
+  <h3>Cost:</h3>
   <form>
     <div>
-      <label for="power">Cost:</label>
       <select id="power" name="power">
+        <option value="" selected>Any</option>
         <option
           *ngFor="let cost of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]; let i = index"
           [value]="cost"
         >
           {{ cost }}
+        </option>
+      </select>
+    </div>
+  </form>
+  <h3>Set:</h3>
+  <form>
+    <div>
+      <select id="set" name="set">
+        <option value="" selected>Any</option>
+        <option *ngFor="let set of sets" [value]="set">
+          {{ set.name }}
         </option>
       </select>
     </div>
