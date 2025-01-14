@@ -43,21 +43,26 @@ export class CardsListComponent implements OnInit {
   }
 
   shapeCardData(card: any): Card {
-    return {
-      name: card?.card_faces?.length ? card?.card_faces[0]?.name : card.name,
-      image_url:
-        card?.image_uris?.png || card?.card_faces[0]?.image_uris?.png || '',
-      set_name: card.set_name,
-      description: card.oracle_text || card.card_faces[0]?.oracle_text,
-      canBeFlipped: card.card_faces ? true : false,
-      alt_image_url: card?.card_faces?.length
-        ? card?.card_faces[1]?.image_uris?.png
-        : '',
-      alt_description: card?.card_faces?.length
-        ? card?.card_faces[1]?.oracle_text
-        : '',
-      alt_name: card?.card_faces?.length ? card?.card_faces[1]?.name : '',
-    };
+    try {
+      return {
+        name: card.card_faces?.length ? card.card_faces[0]?.name : card.name,
+        image_url:
+          card.image_uris?.png || card.card_faces[0]?.image_uris?.png || '',
+        set_name: card.set_name,
+        description: card.oracle_text || card.card_faces[0]?.oracle_text || '',
+        canBeFlipped: card.card_faces ? true : false,
+        alt_image_url: card.card_faces?.length
+          ? card?.card_faces[1]?.image_uris?.png
+          : '',
+        alt_description: card.card_faces?.length
+          ? card.card_faces[1]?.oracle_text
+          : '',
+        alt_name: card.card_faces?.length ? card.card_faces[1]?.name : '',
+      };
+    } catch (err) {
+      console.log('Error shaping card data: ', card, err);
+      return card;
+    }
   }
 
   flipCard(card: Card): void {
