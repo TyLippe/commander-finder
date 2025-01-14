@@ -12,10 +12,13 @@ export class CardsService {
 
   getCommanders(next_page: string | null = null): Observable<any> {
     const headers = { 'User-Agent': 'CommanderCollector/1.0' };
+    const params = { q: 'is:commander' };
+
     return this.httpClient.get(
-      next_page ? next_page : this.apiUrl + '/cards/search?q=is%3Acommander',
+      next_page ? next_page : this.apiUrl + '/cards/search',
       {
         headers,
+        params,
       }
     );
   }
@@ -24,6 +27,26 @@ export class CardsService {
     const headers = { 'User-Agent': 'CommanderCollector/1.0' };
     return this.httpClient.get(this.apiUrl + '/sets', {
       headers,
+    });
+  }
+
+  getFilteredCommanders(filters: any): Observable<any> {
+    const headers = { 'User-Agent': 'CommanderCollector/1.0' };
+
+    let query = 'is:commander';
+    if (filters.colors.length) {
+      query += ' color:' + filters.colors.join(' color:');
+    }
+    if (filters.max_cost) {
+      query += ' cmc<=' + filters.max_cost;
+    }
+    if (filters.set) {
+      query += ' set=' + filters.set;
+    }
+
+    return this.httpClient.get(this.apiUrl + '/cards/search', {
+      headers,
+      params: { q: query },
     });
   }
 }

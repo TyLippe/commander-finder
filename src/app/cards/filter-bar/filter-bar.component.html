@@ -9,7 +9,7 @@
         [id]="color"
         name="color"
         [value]="color.name"
-        (change)="onColorChange($event, color.name)"
+        (change)="onColorChange($event, color.value)"
       />
       <label [for]="color">{{ color.name | titlecase }}</label>
     </div>
@@ -32,7 +32,7 @@
     <div>
       <select id="set" name="set" formControlName="set">
         <option value="" selected>Any</option>
-        <option *ngFor="let set of sets" [value]="set.name">
+        <option *ngFor="let set of sets" [value]="set.code">
           {{ set.name }}
         </option>
       </select>

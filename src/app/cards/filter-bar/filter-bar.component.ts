@@ -18,16 +18,16 @@ import { CardsService } from '../cards.service';
 })
 export class FilterBarComponent implements OnInit {
   filterForm: FormGroup;
-  colors: any = [
-    { name: 'White', value: 'W' },
-    { name: 'Blue', value: 'U' },
-    { name: 'Black', value: 'B' },
-    { name: 'Red', value: 'R' },
-    { name: 'Green', value: 'G' },
-    { name: 'Colorless', value: 'C' },
+  colors: { name: string; value: string }[] = [
+    { name: 'White', value: 'white' },
+    { name: 'Blue', value: 'blue' },
+    { name: 'Black', value: 'black' },
+    { name: 'Red', value: 'red' },
+    { name: 'Green', value: 'green' },
+    { name: 'Colorless', value: 'colorless' },
   ];
-  selectedColors: any = [];
-  costs: any = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  selectedColors: string[] = [];
+  costs: string[] = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10+'];
   sets: Set[] = [];
 
   constructor(
@@ -79,6 +79,8 @@ export class FilterBarComponent implements OnInit {
 
   applyFilters(): void {
     const filters = this.filterForm.value;
-    console.log('Filter applied:', filters);
+    this.cardsService.getFilteredCommanders(filters).subscribe((cards) => {
+      console.log('Filtered cards:', cards);
+    });
   }
 }
