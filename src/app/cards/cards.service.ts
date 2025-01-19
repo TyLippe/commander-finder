@@ -3,35 +3,20 @@ import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
 export class CardsService {
-  private apiUrl = 'https://api.scryfall.com';
+  private apiUrl = environment.apiUrl;
   private filtersSubject = new BehaviorSubject<any>({});
   filters$ = this.filtersSubject.asObservable();
 
   constructor(private httpClient: HttpClient) {}
 
-  getCommanders(next_page: string | null = null): Observable<any> {
-    const headers = { 'User-Agent': 'CommanderCollector/1.0' };
-    const params = { q: 'is:commander' };
-
-    try {
-      return this.httpClient.get(
-        next_page ? next_page : this.apiUrl + '/cards/search',
-        {
-          headers,
-          params,
-        }
-      );
-    } catch (error) {
-      console.error('Error fetching commanders:', error);
-      return new Observable((observer) => {
-        observer.next([]);
-        observer.complete();
-      });
-    }
+  setFilters(filters: any): void {
+    this.filtersSubject.next(filters);
   }
 
   getCardSets(): Observable<any> {
@@ -41,31 +26,39 @@ export class CardsService {
     });
   }
 
-  setFilters(filters: any): void {
-    this.filtersSubject.next(filters);
+  getCommanders(next_page: string | null = null): Observable<any> {
+    try {
+      return this.httpClient.post(this.apiUrl + '/commanders', {
+        next_page: next_page ? next_page : null,
+      });
+    } catch (error) {
+      console.error('Error fetching commanders:', error);
+      return new Observable((observer) => {
+        observer.next([]);
+        observer.complete();
+      });
+    }
   }
 
   getFilteredCommanders(
     filters: any,
     next_page: string | null = null
   ): Observable<any> {
-    const headers = { 'User-Agent': 'CommanderCollector/1.0' };
-
-    let query = 'is:commander';
+    let filterString = 'is:commander';
     if (filters.colors.length) {
-      query += ' color:' + filters.colors.join(' color:');
+      filterString += ' color:' + filters.colors.join(' color:');
     }
     if (filters.max_cost) {
-      query += ' cmc<=' + filters.max_cost;
+      filterString += ' cmc<=' + filters.max_cost;
     }
     if (filters.set) {
-      query += ' set=' + filters.set;
+      filterString += ' set=' + filters.set;
     }
 
     return this.httpClient
-      .get(next_page ? next_page : this.apiUrl + '/cards/search', {
-        headers,
-        params: { q: query },
+      .post(this.apiUrl + '/commanders/filter', {
+        next_page: next_page ? next_page : null,
+        filterString,
       })
       .pipe(
         catchError((error) => {
