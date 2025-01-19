@@ -31,7 +31,7 @@ ng generate --help
 To build the project run:
 
 ```bash
-ng build --output-path docs --base-href /commander-finder/
+ng build --output-path docs --base-href /commander-finder/ --configuration production
 ```
 
 This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.

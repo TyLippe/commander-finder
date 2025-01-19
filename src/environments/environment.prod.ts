@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api.productionurl.com',
+  apiUrl: 'https://commander-finder-api.onrender.com/api',
 };
